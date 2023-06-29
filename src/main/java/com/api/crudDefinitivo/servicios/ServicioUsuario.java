@@ -2,11 +2,8 @@ package com.api.crudDefinitivo.servicios;
 
 import com.api.crudDefinitivo.modelos.Usuario;
 import com.api.crudDefinitivo.repositorios.I_ManejoUsuario;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.Id;
 import java.util.ArrayList;
@@ -16,14 +13,15 @@ import java.util.Optional;
 @Service
 public class ServicioUsuario {
     /// sirve para la inyección de dependencias, la lógica de negocio.
-    @Autowired
-    I_ManejoUsuario manejoUsuario;
+
+    @Autowired private I_ManejoUsuario manejoUsuario;
+
 
     public ServicioUsuario() {
     }
 
-    public ArrayList <Usuario> getArrayUsuarios() {
-        ArrayList <Usuario> usuarios= new ArrayList<>();
+    public List <Usuario> getArrayUsuarios() {
+        List <Usuario> usuarios= new ArrayList<>();
         for(Usuario usuario: this.manejoUsuario.findAll())
         {
             usuarios.add(usuario);

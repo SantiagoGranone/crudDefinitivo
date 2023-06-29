@@ -5,10 +5,12 @@ import com.api.crudDefinitivo.servicios.ServicioUsuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController /// la notación controller que contiene la utilizamos para definir que esta clase va a ser un controlador
@@ -21,8 +23,12 @@ public class UserController
 
     /// El controlador se va a comunicar con los métodos de nuestra interfaz.
     /// Para ello importamos nuestro Servicio Usuario inyectándolo a través de autowired.
-    @Autowired
-    private ServicioUsuario servicioUsuario;
+
+    @Autowired private ServicioUsuario servicioUsuario;
+
+    public UserController(ServicioUsuario servicioUsuario) {
+        this.servicioUsuario = servicioUsuario;
+    }
 
     @PostMapping /// crear un nuevo usuario
     public ResponseEntity <Usuario> create(@RequestBody Usuario usuario)
@@ -34,8 +40,8 @@ public class UserController
 
 
 
-    @GetMapping ///recibo todos los usuarios en una lista
-    public ArrayList<Usuario> getUsuarios()
+    @RequestMapping (value = "/user")
+    public List<Usuario> getUsuarios()
     {
         return this.servicioUsuario.getArrayUsuarios();
     }
